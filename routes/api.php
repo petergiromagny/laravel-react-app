@@ -18,8 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-Route::get('/', 'PostController@get');
-Route::delete('/{id}', 'PostController@delete');
-Route::put('/{id}', 'PostController@put');
-Route::post('/', 'PostController@post');
+Route::middleware('cors')->group(function(){
+    Route::get('/', 'PostController@get');
+    Route::delete('/{id}', 'PostController@delete');
+    Route::put('/{id}', 'PostController@put');
+    Route::post('/', 'PostController@post');
+});
