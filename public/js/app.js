@@ -69920,7 +69920,13 @@ function App() {
     href: "https://www.youtube.com/watch?v=k1xg6S-66Ew",
     target: "_blank",
     className: "nav-link"
-  }, "Tutorial"))))));
+  }, "Tutorial CRUD")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "nav-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://programmingfields.com/react-login-and-registration-app-using-laravel-7-api/",
+    target: "_blank",
+    className: "nav-link"
+  }, "Tutorial Login"))))));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -69940,7 +69946,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _SinglePost__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SinglePost */ "./resources/js/components/SinglePost.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -69968,7 +69973,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
 var Home = /*#__PURE__*/function (_Component) {
   _inherits(Home, _Component);
 
@@ -69986,6 +69990,7 @@ var Home = /*#__PURE__*/function (_Component) {
       body: '',
       posts: []
     };
+    _this.handleInputChange = _this.handleInputChange.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -69999,52 +70004,70 @@ var Home = /*#__PURE__*/function (_Component) {
     value: function getAll() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api").then(function (res) {
         _this2.setState({
-          posts: res.data
+          posts: res.data,
+          id: 0,
+          title: '',
+          body: ''
         });
       });
     }
   }, {
     key: "getOne",
-    value: function getOne(e, post) {
+    value: function getOne(post) {
       this.setState({
-        id: test.id,
-        title: test.title,
-        body: test.body
+        id: post.id,
+        title: post.title,
+        body: post.body
       });
     }
   }, {
     key: "delete",
-    value: function _delete(e, id) {
+    value: function _delete(id) {
       var _this3 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]('/api/${id}').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("/api/".concat(id)).then(function (res) {
         _this3.getAll();
       });
+      console.log(id);
     }
   }, {
     key: "submit",
-    value: function submit(event) {
+    value: function submit(event, id) {
       var _this4 = this;
 
       event.preventDefault();
 
       if (this.state.id === 0) {
-        axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api', {
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api", {
           title: this.state.title,
           body: this.state.body
         }).then(function (res) {
           _this4.getAll();
         });
       } else {
-        axios__WEBPACK_IMPORTED_MODULE_1___default.a.put('/api/${id}', {
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/".concat(id), {
           title: this.state.title,
           body: this.state.body
         }).then(function (res) {
           _this4.getAll();
         });
       }
+    }
+  }, {
+    key: "titlechange",
+    value: function titlechange(event) {
+      this.setState({
+        title: event.target.value
+      });
+    }
+  }, {
+    key: "bodychange",
+    value: function bodychange(event) {
+      this.setState({
+        body: event.target.value
+      });
     }
   }, {
     key: "handleInputChange",
@@ -70060,7 +70083,7 @@ var Home = /*#__PURE__*/function (_Component) {
       var _this5 = this;
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container vh-100 pt-5"
+        className: "container min-vh-100 pt-5"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row justify-content-center mb-5"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -70071,7 +70094,7 @@ var Home = /*#__PURE__*/function (_Component) {
         className: "card-body"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: function onSubmit(e) {
-          return _this5.submit(e);
+          return _this5.submit(e, _this5.state.id);
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
@@ -70099,16 +70122,16 @@ var Home = /*#__PURE__*/function (_Component) {
         type: "submit",
         className: "btn btn-primary w-100"
       }, "Create")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "mt-5"
+        className: "mt-5 pb-5"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row justify-content-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-8"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-        className: "mb-4"
+        className: "mb-3"
       }, "Posts"), this.state.posts.map(function (post) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "card",
+          className: "card mt-2",
           key: post.id
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "card-body"
@@ -70122,12 +70145,12 @@ var Home = /*#__PURE__*/function (_Component) {
           "aria-label": "..."
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick(e) {
-            return _this5.getOne(e, post);
+            return _this5.getOne(post);
           },
           className: "btn btn-primary"
         }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick(e) {
-            return _this5["delete"](e, post);
+            return _this5["delete"](post.id);
           },
           className: "btn btn-danger"
         }, "Delete"))));
@@ -70137,46 +70160,6 @@ var Home = /*#__PURE__*/function (_Component) {
 
   return Home;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (Home);
-
-/***/ }),
-
-/***/ "./resources/js/components/SinglePost.js":
-/*!***********************************************!*\
-  !*** ./resources/js/components/SinglePost.js ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-
-
-
-function Home(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-body"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "card-title"
-  }, props.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "card-text"
-  }, props.body), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "btn-group w-100",
-    role: "group",
-    "aria-label": "..."
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "btn btn-primary"
-  }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "btn btn-danger"
-  }, "Delete"))));
-}
 
 /* harmony default export */ __webpack_exports__["default"] = (Home);
 
@@ -70200,8 +70183,8 @@ function Home(props) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Web\Xampp\Github\TaskApp\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Web\Xampp\Github\TaskApp\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/GitHub/TaskApp/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/GitHub/TaskApp/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

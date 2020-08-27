@@ -14,7 +14,7 @@ class PostController extends Controller
 
     public function delete($id)
     {
-        return response()->json(Post::destroy());
+        return response()->json(Post::destroy($id));
     }
 
     public function put(Request $request, $id)

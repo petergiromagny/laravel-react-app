@@ -10,7 +10,10 @@ function App() {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a href="https://www.youtube.com/watch?v=k1xg6S-66Ew" target='_blank' className='nav-link'>Tutorial</a>
+                            <a href="https://www.youtube.com/watch?v=k1xg6S-66Ew" target='_blank' className='nav-link'>Tutorial CRUD</a>
+                        </li>
+                        <li className="nav-item">
+                            <a href="https://programmingfields.com/react-login-and-registration-app-using-laravel-7-api/" target='_blank' className='nav-link'>Tutorial Login</a>
                         </li>
                     </ul>
                 </div>

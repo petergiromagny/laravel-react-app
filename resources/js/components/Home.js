@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import axios from 'axios';
-import SinglePost from './SinglePost';
+import Axios from 'axios';
 
 class Home extends Component{
     constructor(props) {
@@ -11,6 +10,9 @@ class Home extends Component{
             body: '',
             posts: []
         }
+
+        this.handleInputChange = this.handleInputChange.bind(this)
+
     }
 
     componentDidMount() {
@@ -18,33 +20,37 @@ class Home extends Component{
     }
 
     getAll(){
-        axios.get('/api')
+        Axios.get(`/api`)
             .then((res) => {
                 this.setState({
-                    posts: res.data
+                    posts: res.data,
+                    id: 0,
+                    title: '',
+                    body: ''
                 })
             })
     }
 
-    getOne(e, post){
+    getOne(post){
         this.setState({
-            id: test.id,
-            title: test.title,
-            body: test.body
+            id: post.id,
+            title: post.title,
+            body: post.body
         })
     }
 
-    delete(e, id){
-        axios.delete('/api/${id}')
+    delete(id){
+        Axios.delete(`/api/${id}`)
             .then((res) => {
                 this.getAll();
             })
+        console.log(id)
     }
 
-    submit(event){
+    submit(event, id){
         event.preventDefault();
         if(this.state.id === 0){
-            axios.post('/api', {
+            Axios.post(`/api`, {
                 title: this.state.title,
                 body: this.state.body
             })
@@ -52,7 +58,7 @@ class Home extends Component{
                     this.getAll();
                 })
         } else {
-            axios.put('/api/${id}', {
+            Axios.put(`/api/${id}`, {
                 title: this.state.title,
                 body: this.state.body
             })
@@ -60,6 +66,19 @@ class Home extends Component{
                     this.getAll();
                 })
         }
+    }
+
+    titlechange(event)
+    {
+        this.setState({
+            title:event.target.value
+        })
+    }
+    bodychange(event)
+    {
+        this.setState({
+            body:event.target.value
+        })
     }
 
     handleInputChange(event) {
@@ -74,13 +93,13 @@ class Home extends Component{
 
     render(){
         return (
-            <div className="container vh-100 pt-5">
+            <div className="container min-vh-100 pt-5">
 
                 <div className="row justify-content-center mb-5">
                     <div className="col-md-8">
                         <div className="card">
                             <div className="card-body">
-                                <form onSubmit={(e) => this.submit(e)}>
+                                <form onSubmit={(e) => this.submit(e, this.state.id)}>
                                     <div className="form-group">
                                         <label htmlFor="titleInput">Title</label>
                                         <input
@@ -110,18 +129,18 @@ class Home extends Component{
                     </div>
                 </div>
 
-                <div className='mt-5'>
+                <div className='mt-5 pb-5'>
                     <div className="row justify-content-center">
                         <div className="col-md-8">
-                            <h4 className='mb-4'>Posts</h4>
+                            <h4 className='mb-3'>Posts</h4>
                             { this.state.posts.map(post =>
-                                <div className="card" key={post.id}>
+                                <div className="card mt-2" key={post.id}>
                                     <div className="card-body">
                                         <h5 className="card-title">{post.title}</h5>
                                         <p className="card-text">{post.body}</p>
                                         <div className="btn-group w-100" role="group" aria-label="...">
-                                            <button onClick={(e) => this.getOne(e, post)} className='btn btn-primary'>Edit</button>
-                                            <button onClick={(e) => this.delete(e, post)} className='btn btn-danger'>Delete</button>
+                                            <button onClick={(e) => this.getOne(post)} className='btn btn-primary'>Edit</button>
+                                            <button onClick={(e) => this.delete(post.id)} className='btn btn-danger'>Delete</button>
                                         </div>
                                     </div>
                                 </div>
