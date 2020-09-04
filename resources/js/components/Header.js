@@ -16,8 +16,8 @@ function App() {
                             <a href="https://programmingfields.com/react-login-and-registration-app-using-laravel-7-api/" target='_blank' className='nav-link'>Tutorial Login</a>
                         </li>
                     </ul>
-                    <NavLink className='btn btn-outline-light' to="/">Login</NavLink>
                 </div>
+                <NavLink className='btn btn-outline-light' to="/login">Login</NavLink>
             </div>
         </nav>
     );
