@@ -15,6 +15,9 @@ function App() {
                         <li className="nav-item">
                             <a href="https://programmingfields.com/react-login-and-registration-app-using-laravel-7-api/" target='_blank' className='nav-link'>Tutorial Login</a>
                         </li>
+                        <li className="nav-item">
+                            <a href="https://formik.org/docs/tutorial" target='_blank' className='nav-link'>Formik</a>
+                        </li>
                     </ul>
                 </div>
                 <NavLink className='btn btn-outline-light' to="/login">Login</NavLink>
