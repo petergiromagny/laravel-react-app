@@ -10,6 +10,9 @@ function App() {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
+                            <NavLink to="/new-home" className='nav-link'>Home</NavLink>
+                        </li>
+                        <li className="nav-item">
                             <a href="https://www.youtube.com/watch?v=k1xg6S-66Ew" target='_blank' className='nav-link'>Tutorial CRUD</a>
                         </li>
                         <li className="nav-item">

@@ -77916,6 +77916,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Home */ "./resources/js/components/Home.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Login */ "./resources/js/components/Login.js");
+/* harmony import */ var _NewHome__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./NewHome */ "./resources/js/components/NewHome.js");
+
 
 
 
@@ -77934,6 +77936,10 @@ function App() {
     exact: true,
     path: "/login",
     component: _Login__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
+    exact: true,
+    path: "/new-home",
+    component: _NewHome__WEBPACK_IMPORTED_MODULE_6__["default"]
   }))));
 }
 
@@ -77974,6 +77980,11 @@ function App() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "navbar-nav"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "nav-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+    to: "/new-home",
+    className: "nav-link"
+  }, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "nav-item"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.youtube.com/watch?v=k1xg6S-66Ew",
@@ -78258,15 +78269,15 @@ var Login = function Login() {
       var errors = {};
 
       if (!values.email) {
-        errors.email = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "alert alert-danger mt-2",
-          role: "alert"
-        }, "Email required");
+        errors.email = 'Email required';
       } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-        errors.email = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "alert alert-danger mt-2",
-          role: "alert"
-        }, "Invalid email address");
+        errors.email = 'Invalid email address';
+      }
+
+      if (!values.password) {
+        errors.password = 'Password required';
+      } else if (values.password.length < 6) {
+        errors.password = 'Must be 6 characters or more';
       }
 
       return errors;
@@ -78279,18 +78290,11 @@ var Login = function Login() {
       }, 400);
     }
   }, function (_ref2) {
-    var values = _ref2.values,
-        errors = _ref2.errors,
-        touched = _ref2.touched,
-        handleChange = _ref2.handleChange,
-        handleBlur = _ref2.handleBlur,
-        handleSubmit = _ref2.handleSubmit,
-        isSubmitting = _ref2.isSubmitting;
+    var isSubmitting = _ref2.isSubmitting;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "vh-100 pt-5"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-      className: "bg-dark text-light m-auto align-self-center p-5 rounded-lg col-md-4",
-      onSubmit: handleSubmit
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Form"], {
+      className: "bg-dark text-light m-auto align-self-center p-5 rounded-lg col-md-4"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
       className: "text-center mb-4"
     }, "Connection Administrateur"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -78298,19 +78302,23 @@ var Login = function Login() {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Field"], {
       type: "email",
       name: "email",
-      className: "form-control"
+      className: "form-control",
+      placeholder: "Votre adresse mail"
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["ErrorMessage"], {
       name: "email",
-      component: "div"
+      component: "div",
+      className: "alert alert-danger mt-2"
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "form-group"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Field"], {
       type: "password",
       name: "password",
-      className: "form-control"
+      className: "form-control",
+      placeholder: "Votre mot de passe"
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["ErrorMessage"], {
       name: "password",
-      component: "div"
+      component: "div",
+      className: "alert alert-danger mt-2"
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       type: "submit",
       className: "btn btn-light w-100 mt-3",
@@ -78320,6 +78328,95 @@ var Login = function Login() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Login);
+
+/***/ }),
+
+/***/ "./resources/js/components/NewHome.js":
+/*!********************************************!*\
+  !*** ./resources/js/components/NewHome.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+var _this = undefined;
+
+
+
+
+
+var NewHome = function NewHome() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "container min-vh-100 pt-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Formik"], {
+    initialValues: {
+      title: '',
+      body: ''
+    },
+    onSubmit: function onSubmit(values, _ref) {
+      var isSubmitting = _ref.isSubmitting;
+
+      if (_this.state.id === 0) {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api", {
+          title: values.title,
+          body: values.body
+        }).then(function (res) {
+          _this.getAll();
+        });
+      } else {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.put("/api/".concat(id), {
+          title: values.title,
+          body: values.body
+        }).then(function (res) {
+          _this.getAll();
+        });
+      }
+    }
+  }, function (_ref2) {
+    var isSubmitting = _ref2.isSubmitting;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row justify-content-center mb-5"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-md-8"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "card"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "card-body"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Form"], {
+      onSubmit: function onSubmit(e) {
+        return _this.submit(e, _this.state.id);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "titleInput"
+    }, "Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Field"], {
+      type: "text",
+      name: "title",
+      className: "form-control",
+      placeholder: "Post title"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "bodyInput"
+    }, "Body"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Field"], {
+      type: "text",
+      name: "body",
+      className: "form-control"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      type: "submit",
+      className: "btn btn-primary w-100"
+    }, "Create"))))));
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (NewHome);
 
 /***/ }),
 
@@ -78341,8 +78438,8 @@ var Login = function Login() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Web\Xampp\Github\TaskApp\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Web\Xampp\Github\TaskApp\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/GitHub/TaskApp/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/GitHub/TaskApp/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
