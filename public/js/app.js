@@ -78438,8 +78438,8 @@ var NewHome = function NewHome() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/GitHub/TaskApp/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/GitHub/TaskApp/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Web\Xampp\Github\TaskApp\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Web\Xampp\Github\TaskApp\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

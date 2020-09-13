@@ -23,4 +23,6 @@ Route::middleware('cors')->group(function(){
     Route::delete('/{id}', 'PostController@delete');
     Route::put('/{id}', 'PostController@put');
     Route::post('/', 'PostController@post');
+    Route::post('/login', 'UserController@userLogin');
+    Route::get('user/{email}', 'UserController@userDetail');
 });
